@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Kumpul Kope &mdash; Keluarga JoHans</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f6f1e6;
+    --cream-deep: #efe7d5;
+    --ink: #2b3a45;
+    --ink-soft: #4c5e69;
+    --line: #5a7280;
+    --gold: #a8843f;
+    --gold-soft: #c9a96a;
+    --songke-bg: #161616;
+    --songke-tile-h: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='14' viewBox='0 0 20 14'%3E%3Crect width='20' height='14' fill='%23161616'/%3E%3Crect y='1' width='20' height='1' fill='%23c9a96a'/%3E%3Crect y='12' width='20' height='1' fill='%23c9a96a'/%3E%3Crect x='2' y='3' width='2' height='8' fill='%23d4453a'/%3E%3Crect x='6' y='3' width='2' height='8' fill='%23e8b341'/%3E%3Crect x='10' y='3' width='2' height='8' fill='%234f7d4a'/%3E%3Crect x='14' y='3' width='2' height='8' fill='%23e9e4d8'/%3E%3Cpath d='M18 7 L19 4 L20 7 L19 10 Z' fill='%233f7fae'/%3E%3C/svg%3E");
+    --songke-tile-v: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='20' viewBox='0 0 14 20'%3E%3Crect width='14' height='20' fill='%23161616'/%3E%3Crect x='1' width='1' height='20' fill='%23c9a96a'/%3E%3Crect x='12' width='1' height='20' fill='%23c9a96a'/%3E%3Crect x='3' y='2' width='8' height='2' fill='%23d4453a'/%3E%3Crect x='3' y='6' width='8' height='2' fill='%23e8b341'/%3E%3Crect x='3' y='10' width='8' height='2' fill='%234f7d4a'/%3E%3Crect x='3' y='14' width='8' height='2' fill='%23e9e4d8'/%3E%3Cpath d='M7 18 L4 19 L7 20 L10 19 Z' fill='%233f7fae'/%3E%3C/svg%3E");
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    background: var(--cream-deep);
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- COVER ---------- */
+  #cover{
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      radial-gradient(circle at 50% 20%, rgba(255,255,255,0.4), transparent 60%),
+      var(--cream-deep);
+    transition: transform 0.9s cubic-bezier(.65,0,.35,1), opacity 0.9s ease;
+  }
+
+  #cover.hide{
+    transform: translateY(-100%);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .cover-card{
+    width: 100%;
+    padding: 48px 28px 38px;
+    border: 1px solid var(--gold-soft);
+    outline: 1px solid var(--gold-soft);
+    outline-offset: 6px;
+    text-align: center;
+    background: var(--cream);
+    box-shadow: 0 18px 40px -20px rgba(43,58,69,0.35);
+    position: relative;
+  }
+
+  .cover-corner{
+    position:absolute;
+    width: 26px;
+    height: 26px;
+    border: 1.5px solid var(--gold);
+  }
+  .cover-corner.tl{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .cover-corner.tr{ top:-1px; right:-1px; border-left:none; border-bottom:none; }
+  .cover-corner.bl{ bottom:-1px; left:-1px; border-right:none; border-top:none; }
+  .cover-corner.br{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+
+  /* ---------- SONGKE BORDER (4 strip mengelilingi kartu) ---------- */
+  .songke-wrap{
+    position: relative;
+    padding: 14px;
+    background: var(--songke-bg);
+  }
+
+  #cover .songke-wrap{
+    width: min(86vw, 408px);
+  }
+
+  .songke-wrap .strip{
+    position: absolute;
+  }
+  .songke-wrap .strip.top,
+  .songke-wrap .strip.bottom{
+    left: 0; right: 0; height: 14px;
+    background-image: var(--songke-tile-h);
+    background-repeat: repeat-x;
+    background-size: 20px 14px;
+  }
+  .songke-wrap .strip.top{ top: 0; }
+  .songke-wrap .strip.bottom{ bottom: 0; }
+
+  .songke-wrap .strip.left,
+  .songke-wrap .strip.right{
+    top: 0; bottom: 0; width: 14px;
+    background-image: var(--songke-tile-v);
+    background-repeat: repeat-y;
+    background-size: 14px 20px;
+  }
+  .songke-wrap .strip.left{ left: 0; }
+  .songke-wrap .strip.right{ right: 0; }
+
+  .songke-inner{
+    position: relative;
+  }
+
+  .cover-eyebrow{
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+  }
+
+  .cover-card .kepada{
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+
+  .cover-name{
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.1rem;
+    color: var(--ink);
+    margin: 0 0 22px;
+    min-height: 1.4em;
+    border-bottom: 1px solid var(--gold-soft);
+    display: inline-block;
+    padding: 0 6px 4px;
+  }
+
+  .cover-divider{
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 22px auto;
+  }
+
+  #openBtn{
+    margin-top: 10px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  #openBtn:hover, #openBtn:focus-visible{
+    background: var(--gold);
+    color: var(--cream);
+  }
+
+  .cover-sub{
+    margin-top: 14px;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- PAGE ---------- */
+  #page{
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  .frame{
+    border: 1px solid var(--line);
+    outline: 1px solid var(--line);
+    outline-offset: 6px;
+    background: var(--cream);
+    padding: 44px 26px;
+    position: relative;
+  }
+
+  .card-margin{ margin-bottom: 26px; }
+
+  .frame .corner{
+    position:absolute;
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--gold);
+  }
+  .frame .corner.tl{ top: -7px; left: -7px; border-right:none; border-bottom:none; }
+  .frame .corner.tr{ top: -7px; right: -7px; border-left:none; border-bottom:none; }
+  .frame .corner.bl{ bottom: -7px; left: -7px; border-right:none; border-top:none; }
+  .frame .corner.br{ bottom: -7px; right: -7px; border-left:none; border-top:none; }
+
+  .center{ text-align: center; }
+
+  .title-script{
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--ink);
+    margin: 0 0 6px;
+    line-height: 1;
+  }
+
+  .title-sub{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 4px;
+  }
+
+  .title-date{
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+  }
+
+  .salam{
+    font-size: 1.4rem;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--gold);
+    text-align: center;
+    margin: 0 0 18px;
+    letter-spacing: 0.06em;
+  }
+
+  .body-text{
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink);
+    text-align: center;
+    margin: 0 0 22px;
+  }
+
+  .event-name{
+    text-align: center;
+    margin: 22px 0;
+  }
+
+  .event-name .label{
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+
+  .event-name .name{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.7rem;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .divider-orn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 12px;
+    margin: 28px 0;
+    color: var(--gold);
+  }
+  .divider-orn::before, .divider-orn::after{
+    content:"";
+    height: 1px;
+    width: 70px;
+    background: linear-gradient(to var(--dir, right), transparent, var(--gold-soft));
+  }
+  .divider-orn::after{ --dir: left; }
+
+  .details{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto 8px;
+    max-width: 380px;
+  }
+  .details td{
+    padding: 7px 4px;
+    font-size: 1rem;
+    vertical-align: top;
+  }
+  .details td.k{
+    width: 95px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .details td.s{ width: 14px; color: var(--ink-soft); }
+  .details td.v{ font-weight: 500; }
+
+  .closing{
+    text-align: center;
+    font-size: 1.02rem;
+    line-height: 1.8;
+    margin: 30px 0 6px;
+  }
+
+  .signoff{
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .footer-note{
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    margin-top: 30px;
+  }
+
+  /* lokasi */
+  .map-icon{
+    font-size: 2.2rem;
+    margin-bottom: 6px;
+  }
+
+  .location-name{
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin: 0 0 6px;
+  }
+
+  .location-desc{
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+  }
+
+  .map-btn{
+    display: inline-block;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--ink);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 13px 30px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .map-btn:hover, .map-btn:focus-visible{
+    background: var(--gold);
+    color: var(--cream);
+  }
+
+  /* music toggle */
+  #musicBtn{
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    z-index: 60;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    background: var(--cream);
+    color: var(--gold);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 16px -6px rgba(43,58,69,0.4);
+  }
+  #musicBtn.spinning{ animation: spin 4s linear infinite; }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce){
+    #cover, #musicBtn.spinning{ transition:none; animation:none; }
+  }
+
+  @media (max-width: 420px){
+    .title-script{ font-size: 2.4rem; }
+    .frame{ padding: 34px 16px; outline-offset: 7px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== COVER ===== -->
+  <div id="cover">
+    <div class="songke-wrap">
+      <div class="strip top"></div>
+      <div class="strip bottom"></div>
+      <div class="strip left"></div>
+      <div class="strip right"></div>
+      <div class="songke-inner">
+        <div class="cover-card">
+          <div class="cover-corner tl"></div>
+          <div class="cover-corner tr"></div>
+          <div class="cover-corner bl"></div>
+          <div class="cover-corner br"></div>
+
+          <p class="cover-eyebrow">Undangan Kumpul Kope</p>
+          <p class="kepada">Kepada Bapak / Ibu / Sdr-i</p>
+          <div class="cover-name">Tamu Undangan</div>
+          <div class="cover-divider"></div>
+          <button id="openBtn" type="button">Buka Undangan</button>
+          <p class="cover-sub">Yohanes Mersiano Ndau</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONTENT ===== -->
+  <div id="page">
+
+    <!-- Card 1: judul -->
+    <div class="songke-wrap card-margin">
+      <div class="strip top"></div>
+      <div class="strip bottom"></div>
+      <div class="strip left"></div>
+      <div class="strip right"></div>
+      <div class="songke-inner">
+        <div class="frame">
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+          <div class="center">
+            <h1 class="title-script">Undangan</h1>
+            <p class="title-sub">Kumpul Kope</p>
+            <p class="title-date">Selasa, 15 September 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: isi -->
+    <div class="songke-wrap card-margin">
+      <div class="strip top"></div>
+      <div class="strip bottom"></div>
+      <div class="strip left"></div>
+      <div class="strip right"></div>
+      <div class="songke-inner">
+        <div class="frame">
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+
+          <p class="salam">Syaloom</p>
+
+          <p class="body-text">
+            Saya turut mengundang Bapak / Ibu / Sdr/i
+            untuk hadir dalam:
+          </p>
+
+          <div class="event-name">
+            <p class="label">Acara</p>
+            <p class="name">Kumpul Kope</p>
+
+            <p class="label">Yohanes Mersiano Ndau</p>
+          </div>
+
+          <div class="divider-orn"></div>
+
+          <table class="details">
+            <tr>
+              <td class="k">Tanggal</td><td class="s">:</td>
+              <td class="v">Selasa, 15 September 2026</td>
+            </tr>
+            <tr>
+              <td class="k">Waktu</td><td class="s">:</td>
+              <td class="v">Mulai pukul 08.00 WIB &ndash; selesai</td>
+            </tr>
+            <tr>
+              <td class="k">Tempat</td><td class="s">:</td>
+              <td class="v">Kaper,Labuan bajo</td>
+            </tr>
+          </table>
+
+          <div class="divider-orn"></div>
+
+          <p class="closing">
+            Besar harapan kami agar Bapak / Ibu / Sdr/i<br>
+            dapat ikut serta dalam acara ini.
+          </p>
+
+          <p class="closing">
+            Bila ada salah kata dalam undangan ini,<br>
+            kami mohon maaf. Sekian dan terima kasih.
+          </p>
+
+          
+
+          <p class="footer-note">&mdash; Kumpul Kope &middot; 15 September 2026 &middot; Kaper Labuan Bajo &mdash;</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: lokasi -->
+    <div class="songke-wrap card-margin">
+      <div class="strip top"></div>
+      <div class="strip bottom"></div>
+      <div class="strip left"></div>
+      <div class="strip right"></div>
+      <div class="songke-inner">
+        <div class="frame">
+          <div class="corner tl"></div>
+          <div class="corner tr"></div>
+          <div class="corner bl"></div>
+          <div class="corner br"></div>
+          <div class="center">
+            <div class="map-icon">&#128205;</div>
+            <p class="location-name">Kaper</p>
+            <p class="location-desc">Detail Lokasi acara dapat dilihat di bawah ini</p>
+            <a class="map-btn" href="https://maps.app.goo.gl/wrvx7NkErPqC6pQX6" target="_blank" rel="noopener noreferrer">Buka Lokasi</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- music control -->
+  <button id="musicBtn" type="button" aria-label="Putar atau hentikan musik" title="Musik">&#9835;</button>
+
+  <!-- YouTube player tersembunyi, hanya untuk audio latar -->
+  <div id="ytPlayer" style="position:fixed; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;"></div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    const cover = document.getElementById('cover');
+    const openBtn = document.getElementById('openBtn');
+    const musicBtn = document.getElementById('musicBtn');
+    let playing = false;
+    let ytReady = false;
+    let player;
+
+    // Ganti VIDEO_ID di bawah kalau ganti musik lagi.
+    const VIDEO_ID = 'vw-NJkWl1v0';
+
+    function onYouTubeIframeAPIReady(){
+      player = new YT.Player('ytPlayer', {
+        videoId: VIDEO_ID,
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          loop: 1,
+          playlist: VIDEO_ID, // dibutuhkan agar loop berfungsi
+          modestbranding: 1,
+          disablekb: 1,
+          fs: 0
+        },
+        events: {
+          onReady: () => { ytReady = true; }
+        }
+      });
+    }
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+
+    function playMusic(){
+      if (ytReady && player && player.playVideo){
+        player.playVideo();
+        playing = true;
+        musicBtn.classList.add('spinning');
+        musicBtn.innerHTML = '&#10074;&#10074;';
+      } else {
+        setTimeout(playMusic, 400);
+      }
+    }
+
+    function pauseMusic(){
+      if (player && player.pauseVideo){ player.pauseVideo(); }
+      playing = false;
+      musicBtn.classList.remove('spinning');
+      musicBtn.innerHTML = '&#9835;';
+    }
+
+    openBtn.addEventListener('click', () => {
+      cover.classList.add('hide');
+      document.body.style.overflow = 'auto';
+      playMusic();
+      setTimeout(() => { cover.style.display = 'none'; }, 950);
+    });
+
+    musicBtn.addEventListener('click', () => {
+      if (playing){ pauseMusic(); } else { playMusic(); }
+    });
+
+    document.body.style.overflow = 'hidden';
+  </script>
+
+</body>
+</html>
